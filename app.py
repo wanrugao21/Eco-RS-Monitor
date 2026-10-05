@@ -22,20 +22,21 @@ run_btn = st.sidebar.button("Launch Autonomous Monitor", type="primary")
 st.sidebar.markdown("---")
 st.sidebar.caption("Endpoints utilized: \n- 🔍 /v1/search\n- 📥 /v1/fetch\n- 🧠 /v1/agent")
 
-# 4. Simulated TinyFish API Functions (Mocked for Hackathon UI Demo)
+# 4. Simulated TinyFish API Functions (Mocked for Hackathon UI Demo with Real Paper URL)
 def tinyfish_search(query):
-    return [{"title": f"Recent Sentinel-2 UHI mapping techniques in {query}", "url": "https://nature-rs-journal.org/uhi-latest"}]
+    # Updated to a REAL open-access academic paper URL about Sentinel-2 and UHI
+    return [{"title": f"Recent Sentinel-2 UHI mapping techniques in {query}", "url": "https://www.mdpi.com/2072-4292/13/18/3554"}]
 
 def tinyfish_fetch(url):
-    return "Abstract: This research leverages Sentinel-2 MSI Level-2A imagery to compute the Normalized Difference Vegetation Index (NDVI) and retrieves Land Surface Temperature (LST) to evaluate the urban thermal environment..."
+    return "Abstract: This research leverages Sentinel-2 MSI Level-2A imagery to compute the Normalized Difference Vegetation Index (NDVI) and retrieves Land Surface Temperature (LST) to evaluate the urban thermal environment. The spatial resolution of Sentinel-2 allows for highly detailed intra-urban heat distribution mapping..."
 
 def tinyfish_agent(context):
     return """
 #### 📊 Geospatial Intelligence Report
 * **Primary Methodology:** NDVI thresholding combined with LST retrieval via the split-window algorithm.
 * **Satellite Data Source:** Sentinel-2 Level-2A (Multispectral Instrument).
-* **Key Findings:** Strong negative correlation (-0.82) observed between vegetation density and UHI intensity.
-* **Recommended Action:** Increase green infrastructure in high LST zones identified by the agent.
+* **Key Findings:** Strong negative correlation (-0.82) observed between vegetation density and UHI intensity at the neighborhood scale.
+* **Recommended Action:** Increase targeted green infrastructure in high LST zones explicitly identified by the agent's multi-temporal analysis.
 """
 
 # 5. Execution Workflow
@@ -49,7 +50,7 @@ if run_btn:
             time.sleep(1.5)
             search_results = tinyfish_search(target_city)
             target_url = search_results[0]['url']
-            st.write(f"✅ Found top resource: `{target_url}`")
+            st.write(f"✅ Found top resource: [{target_url}]({target_url})")
             
             # Endpoint 2: Fetch
             st.write(f"📥 **[Endpoint 2: Fetch]** Scraping full unstructured text from the source...")
